@@ -1,0 +1,5 @@
+Brute Force              = every possible outcome
+greedy                   = choose the current best option
+Divide & conquer         = divide into sub problems
+Dynamic programming      = store results of subproblems to avoid redundant calculations.
+Backtracking             = All possible solutions
