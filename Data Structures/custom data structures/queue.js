@@ -96,37 +96,18 @@ class QueueOBJ{
 }
 
 
-const queueobj = new QueueOBJ()
-queueobj.enqueue(3)
-queueobj.enqueue(3)
-queueobj.enqueue(3)
-queueobj.enqueue(3)
-queueobj.print()
-queueobj.dequeue()
-queueobj.dequeue()
-queueobj.dequeue()
-queueobj.dequeue()
-console.log(queueobj.dequeue())
-queueobj.print()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// const queueobj = new QueueOBJ()
+// queueobj.enqueue(3)
+// queueobj.enqueue(3)
+// queueobj.enqueue(3)
+// queueobj.enqueue(3)
+// queueobj.print()
+// queueobj.dequeue()
+// queueobj.dequeue()
+// queueobj.dequeue()
+// queueobj.dequeue()
+// console.log(queueobj.dequeue())
+// queueobj.print()
 
 
 
@@ -135,3 +116,67 @@ queueobj.print()
 
 
 /**************************************************************Circular Queues********************************************************************************/
+
+class CircularQueue{
+    constructor(capacity){
+        this.items = new Array(capacity)
+        this.capacity = capacity
+        this.currentLength = 0
+        this.rear = -1
+        this.front = -1
+    }
+
+    isEmpty(){
+        return this.currentLength == 0
+    }
+
+    //check if the circular queue is full or not  
+    isFull(){ 
+        return this.currentLength == this.capacity
+    } 
+
+    enqueue(val){
+        if(!this.isFull()){
+            this.rear = (this.rear + 1) % this.capacity
+            this.items[this.rear] = val;
+            this.currentLength +=1
+            if(this.front == -1){
+                this.front = this.rear;
+            }
+            return "Pushed"
+        } else{
+                return "Queue is Full"
+        }
+    }
+    dequeue(){
+        if(this.isEmpty()){
+            return "Queue is Empty"
+        }
+        else{
+            const val = this.items[this.front]
+            this.items[this.front] = null
+            this.front =(this.front + 1) % this.capacity
+            return val
+        }
+    }
+    print(){
+        for(let val of this.items){
+            console.log(val);
+        }
+    }
+
+
+
+}
+
+
+const cirQueue = new CircularQueue(5)
+console.log(cirQueue.enqueue(2))
+console.log(cirQueue.enqueue(5))
+console.log(cirQueue.enqueue(7))
+console.log(cirQueue.enqueue(9))
+console.log(cirQueue.enqueue(11))
+console.log(cirQueue.enqueue(15))
+console.log(cirQueue.dequeue())
+console.log(cirQueue.dequeue())
+cirQueue.print();
